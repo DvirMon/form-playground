@@ -1,0 +1,36 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--surface-card, #fff);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color, #0d6efd);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-secondary, #666);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  background: var(--surface-hover, #f8f9fa);
+}
+
+a.active {
+  color: var(--primary-color, #0d6efd);
+  background: var(--primary-50, #eef5ff);
+}

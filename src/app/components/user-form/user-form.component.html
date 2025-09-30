@@ -1,0 +1,194 @@
+<form  [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <h2>User Information</h2>
+
+    <!-- Personal Information -->
+    <div class="section">
+      <h3>Personal Information</h3>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          [class]="getFieldClass(form.get('firstName')?.errors)"
+        />
+        @if (form.get('firstName')?.errors && form.get('firstName')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('firstName')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          [class]="getFieldClass(form.get('lastName')?.errors)"
+        />
+        @if (form.get('lastName')?.errors && form.get('lastName')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('lastName')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          [class]="getFieldClass(form.get('email')?.errors)"
+        />
+        @if (form.get('email')?.errors && form.get('email')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('email')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Date of Birth</label>
+        <input
+          id="dateOfBirth"
+          type="date"
+          formControlName="dateOfBirth"
+          [class]="getFieldClass(form.get('dateOfBirth')?.errors)"
+        />
+        @if (form.get('dateOfBirth')?.errors && form.get('dateOfBirth')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('dateOfBirth')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone (optional)</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          [class]="getFieldClass(form.get('phone')?.errors)"
+        />
+        @if (form.get('phone')?.errors && form.get('phone')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('phone')?.errors) }}</span>
+        }
+      </div>
+    </div>
+
+    <!-- Address Information -->
+    <div class="section" formGroupName="address">
+      <h3>Address</h3>
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input
+          id="street"
+          type="text"
+          formControlName="street"
+          [class]="getFieldClass(form.get('address.street')?.errors)"
+        />
+        @if (form.get('address.street')?.errors && form.get('address.street')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('address.street')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+          id="city"
+          type="text"
+          formControlName="city"
+          [class]="getFieldClass(form.get('address.city')?.errors)"
+        />
+        @if (form.get('address.city')?.errors && form.get('address.city')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('address.city')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="state">State</label>
+        <input
+          id="state"
+          type="text"
+          formControlName="state"
+          [class]="getFieldClass(form.get('address.state')?.errors)"
+        />
+        @if (form.get('address.state')?.errors && form.get('address.state')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('address.state')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="zipCode">ZIP Code</label>
+        <input
+          id="zipCode"
+          type="text"
+          formControlName="zipCode"
+          [class]="getFieldClass(form.get('address.zipCode')?.errors)"
+        />
+        @if (form.get('address.zipCode')?.errors && form.get('address.zipCode')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('address.zipCode')?.errors) }}</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input
+          id="country"
+          type="text"
+          formControlName="country"
+          [class]="getFieldClass(form.get('address.country')?.errors)"
+        />
+        @if (form.get('address.country')?.errors && form.get('address.country')?.touched) {
+        <span class="error">{{ getErrorMessage(form.get('address.country')?.errors) }}</span>
+        }
+      </div>
+    </div>
+
+    <!-- Preferences -->
+    <div class="section" formGroupName="preferences">
+      <h3>Preferences</h3>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" formControlName="newsletter" />
+          Subscribe to newsletter
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Notifications</label>
+        <div class="checkbox-group">
+          @for (type of notificationTypes; track type) {
+          <label>
+            <input
+              type="checkbox"
+              [value]="type"
+              (change)="onNotificationChange($event)"
+              [checked]="isNotificationSelected(type)"
+            />
+            {{ type }}
+          </label>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="theme">Theme</label>
+        <select id="theme" formControlName="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="system">System</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit">
+        {{ submitting() ? 'Submitting...' : 'Submit' }}
+      </button>
+      <button type="button" (click)="form.reset()">Reset</button>
+    </div>
+  </div>
+
+  <!-- @if (formData()) { -->
+  <div class="preview">
+    <h3>Form Data Preview</h3>
+    <pre>{{ formData() | json }}</pre>
+  </div>
+  <!-- } -->
+</form>

@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--surface-ground, #f8f9fa);
+  color: var(--text-primary, #333);
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
